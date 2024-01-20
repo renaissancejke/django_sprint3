@@ -1,5 +1,6 @@
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
+
 from core.models import PublishedModel
 
 User = get_user_model()
@@ -10,8 +11,10 @@ class Post(PublishedModel):
     text = models.TextField('Текст')
     pub_date = models.DateTimeField(
         'Дата и время публикации',
-        help_text='Если установить дату и время в будущем — '
-                  'можно делать отложенные публикации.'
+        help_text=(
+            'Если установить дату и время в будущем — '
+            'можно делать отложенные публикации.'
+        )
     )
     author = models.ForeignKey(
         User,

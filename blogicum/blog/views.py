@@ -1,8 +1,11 @@
-from datetime import datetime
+from django.utils import timezone
 
 from django.shortcuts import render, get_object_or_404
 
-from .models import Post, Category
+from .models import Category
+from .models import Post
+
+POSTS_MAX = 5
 
 
 def posts():
@@ -13,12 +16,13 @@ def posts():
     ).filter(
         is_published=True,
         category__is_published=True,
-        pub_date__lte=datetime.now()
+        pub_date__lte=timezone.now()
     )
 
 
 def index(request):
-    return render(request, 'blog/index.html', {'post_list': posts()[:5]})
+    return render(request, 'blog/index.html',
+                  {'post_list': posts()[:POSTS_MAX]})
 
 
 def post_detail(request, id):
