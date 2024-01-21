@@ -1,9 +1,7 @@
 from django.utils import timezone
+from django.shortcuts import get_object_or_404, render
 
-from django.shortcuts import render, get_object_or_404
-
-from .models import Category
-from .models import Post
+from .models import Category, Post
 
 POSTS_MAX = 5
 
